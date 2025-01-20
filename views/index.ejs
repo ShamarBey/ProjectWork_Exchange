@@ -12,7 +12,10 @@
         <div class="card-body text-center">
           <h2 class="card-title">Binance</h2>
           <p class="card-text">Крупнейшая криптобиржа в мире.</p>
-          <a href="/exchanges/binance" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+          <button class="btn btn-primary btn-lg btn-block details-button">Подробнее</button>
+          <div class="details-content" style="display: none;">
+            <p class="mt-3">Binance — это крупнейшая в мире криптобиржа, основанная в 2017 году. Она поддерживает множество криптовалют и предоставляет услуги торговли, стейкинга и многое другое.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -24,7 +27,10 @@
         <div class="card-body text-center">
           <h2 class="card-title">Bybit</h2>
           <p class="card-text">Популярная биржа для торговли фьючерсами.</p>
-          <a href="/exchanges/bybit" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+          <button class="btn btn-primary btn-lg btn-block details-button">Подробнее</button>
+          <div class="details-content" style="display: none;">
+            <p class="mt-3">Bybit — это популярная биржа для торговли криптовалютными фьючерсами. Она известна своей высокой производительностью и удобным интерфейсом.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -36,9 +42,36 @@
         <div class="card-body text-center">
           <h2 class="card-title">Houbi</h2>
           <p class="card-text">Одна из ведущих бирж в Азии.</p>
-          <a href="/exchanges/houbi" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+          <button class="btn btn-primary btn-lg btn-block details-button">Подробнее</button>
+          <div class="details-content" style="display: none;">
+            <p class="mt-3">Houbi — это одна из ведущих криптобирж в Азии, основанная в 2013 году. Она поддерживает множество криптовалют и предоставляет услуги торговли и стейкинга.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Находим все кнопки "Подробнее"
+    const detailsButtons = document.querySelectorAll('.details-button');
+
+    // Добавляем обработчик события для каждой кнопки
+    detailsButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Находим элемент с дополнительной информацией
+        const detailsContent = this.nextElementSibling;
+
+        // Переключаем видимость элемента
+        if (detailsContent.style.display === 'none' || detailsContent.style.display === '') {
+          detailsContent.style.display = 'block';
+          this.textContent = 'Скрыть'; // Меняем текст кнопки
+        } else {
+          detailsContent.style.display = 'none';
+          this.textContent = 'Подробнее'; // Меняем текст кнопки
+        }
+      });
+    });
+  });
+</script>
