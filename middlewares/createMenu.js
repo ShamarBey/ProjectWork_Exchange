@@ -1,13 +1,17 @@
-var Exchange = require("../models/exchange").Exchange;
+// middlewares/createMenu.js
+const Exchange = require("../models/exchange").Exchange; // Убедитесь, что путь правильный
 
+module.exports = async function(req, res, next) {
+    res.locals.nav = [];
 
-module.exports = async function(req,res,next){
-    res.locals.nav = []
+    try {
+        const menu = await Exchange.find({}, { _id: 0, title: 1, nick: 1 }); // Используем пустой объект для поиска
+        if (menu.length !== 0) {
+            res.locals.nav = menu;
+        }
+    } catch (err) {
+        console.error("Ошибка при получении данных из базы:", err);
+    }
 
-
-var menu = await Exchange.find(null,{_id:0,title:1,nick:1});
-console.log(menu);
-if (menu.length != 0) {
-    res.locals.nav = menu;
-}   next();
-}
+    next();
+};

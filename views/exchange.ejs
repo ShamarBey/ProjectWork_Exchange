@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-    <img src="<%= picture %>" alt="Exchange Avatar">
-    <p><%= desc %></p>
-</body>
-</html>
+<% layout('layout/page.ejs') %>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-lg animate__animated animate__fadeIn">
+        <% if (picture) { %>
+          <img src="<%= picture %>" class="card-img-top img-fluid rounded-top" alt="<%= title %>">
+        <% } %>
+        <div class="card-body text-center">
+          <% if (title) { %>
+            <h1 class="card-title display-4 mb-4"><%= title %></h1>
+          <% } %>
+          <% if (desc) { %>
+            <p class="card-text lead mb-4"><%= desc %></p>
+          <% } %>
+          <a href="/exchanges" class="btn btn-primary btn-lg btn-block">Назад</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

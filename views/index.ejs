@@ -1,12 +1,44 @@
-<% layout('./layout/page.ejs') %>
+<% layout('layout/page.ejs') %>
 
-<% if(user) {%>
-    <h1>Привет <%= user.username %></h1>
-<% }else{ %>
-    <h1>Привет незалогиненный пользователь</h1>
-<% } %>
+<div class="container py-5">
+  <h1 class="display-4 text-center mb-4">Добро пожаловать на наш сайт!</h1>
+  <p class="lead text-center">Счетчик посещений: <%= counter %></p>
 
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<p>Счетчик: <%= counter %></p>
-   
+  <div class="row mt-5">
+    <!-- Binance -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-lg animate__animated animate__fadeIn">
+        <img src="/images/binance.png" class="card-img-top img-fluid rounded-top" alt="Binance">
+        <div class="card-body text-center">
+          <h2 class="card-title">Binance</h2>
+          <p class="card-text">Крупнейшая криптобиржа в мире.</p>
+          <a href="/exchanges/binance" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bybit -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-lg animate__animated animate__fadeIn">
+        <img src="/images/bybit.png" class="card-img-top img-fluid rounded-top" alt="Bybit">
+        <div class="card-body text-center">
+          <h2 class="card-title">Bybit</h2>
+          <p class="card-text">Популярная биржа для торговли фьючерсами.</p>
+          <a href="/exchanges/bybit" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Houbi -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-lg animate__animated animate__fadeIn">
+        <img src="/images/houbi.png" class="card-img-top img-fluid rounded-top" alt="Houbi">
+        <div class="card-body text-center">
+          <h2 class="card-title">Houbi</h2>
+          <p class="card-text">Одна из ведущих бирж в Азии.</p>
+          <a href="/exchanges/houbi" class="btn btn-primary btn-lg btn-block">Подробнее</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

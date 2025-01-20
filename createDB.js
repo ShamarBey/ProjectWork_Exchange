@@ -1,33 +1,26 @@
 const { MongoClient } = require('mongodb');
-// or as an es module:
-// import { MongoClient } from 'mongodb'
-var data = require("./data.js").data;
-console.log(data);
+const data = require('./data.js').data;
 
-// Connection URL
-const url = 'mongodb://localhost:27017'; 
-const client = new MongoClient(url);
- 
-// Database Name
+const url = 'mongodb://localhost:27017';
 const dbName = 'tc2024';
 
 async function main() {
-// Use connect method to connect to the server await client.connect();
-console.log('Connected successfully to server'); 
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        console.log('Connected successfully to server');
+        const db = client.db(dbName);
+        const collection = db.collection('exchanges');
 
-const db = client.db(dbName);
-const collection = db.collection('exchanges');
+        // Удаляем старые данные (опционально)
+        await collection.deleteMany({});
 
-// the following code examples can be pasted here...
-const insertResult = await collection.insertMany(data);
-console.log('Inserted documents =>', insertResult);
-
-
-return 'done.';
+        // Вставляем новые данные
+        const insertResult = await collection.insertMany(data);
+        console.log('Inserted documents:', insertResult.insertedCount);
+    } finally {
+        await client.close();
+    }
 }
 
-
-main()
-.then(console.log)
-.catch(console.error)
-.finally(() => client.close());
+main().catch(console.error);

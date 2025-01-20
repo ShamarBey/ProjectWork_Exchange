@@ -1,29 +1,31 @@
 var express = require('express');
 var router = express.Router();
-var Cat = require('../models/exchange').exchange;
+var Exchange = require('../models/exchange').Exchange;
 var checkAuth = require("../middlewares/checkAuth.js");
 
-
-/* GET exchange listing. */
-router.get('/', function(req, res, next) {
-  res.send('Новый маршрутизатор, для маршрутов, начинающихся с exchange');
+/* GET exchanges listing. */
+router.get('/', async function(req, res, next) {
+  try {
+    const exchanges = await Exchange.find({});
+    res.render('exchanges', { title: 'Обменники', exchanges: exchanges });
+  } catch (err) {
+    next(err);
+  }
 });
 
-/* Страница котов */
+/* Страница exchanges */
 router.get("/:nick", checkAuth, async function(req, res, next) {
-    var exchanges = await exchange.find({nick: req.params.nick});
-    console.log(exchanges)
-    if(!exchanges.length) return next(new Error("Нет такой биржи в мировой экономике"))
-        var exchange = exchanges[0];
-        res.render('exchange', {
-            title: exchange.title,
-            picture: exchange.avatar,
-            desc: exchange.desc
-        })
+  try {
+    const exchange = await Exchange.findOne({ nick: req.params.nick });
+    if (!exchange) return next(new Error("Нет такой биржи в мировой экономике"));
+    res.render('exchange', {
+      title: exchange.title,
+      picture: exchange.avatar,
+      desc: exchange.desc
+    });
+  } catch (err) {
+    next(err);
+  }
 });
-
-
-//Hero.find({},{_id:0,title:1,nick:1},callback)
-
 
 module.exports = router;
